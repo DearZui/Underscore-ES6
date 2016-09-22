@@ -31,3 +31,10 @@ aruguments.length
 _keys({{one: 1, two: 2, three: 3}})  //["one", "two", "three"]
 ```
 首先判断传入obj是不是个对象，这里的`_.isObject()`是判断是否为对象的一个方法，很简单。IE9以上的浏览器有个原生方法[Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys),和我们要实现的方法所达到的功能是一样。那么IE9以下呢，我们用一个循环，把它里面的所有key都放进keys数组。接下来又是一句难懂的，`hasEnumBug`这又是啥玩意? 我咋无论在哪个浏览器里面测`!{toString: null}.propertyIsEnumerable('toString');`返回都是false呢，那到底它什么时候会true呢?想到了红宝书里面似乎有讲这个**数据属性**，4个特性不具体说了，其中的Enumerable设置为false后就不能用for-in循环来返回属性了。`collectNonEnumProps`这个函数就来解决这个问题。
+
+***
+***
+其实each和map是很类似的，它们之间有啥区别呢，我们通过代码来瞅瞅
+两者实现的方式很类似，最大的区别为返回值
+map返回的值`results`为一个新定义的数组，而each返回的是参数中的`obj`;
+所以两者的区别就在`each(obj, iteratee)`中的iteratee是会改变obj的，而map返回的是一个新的iteratee过的数组。
