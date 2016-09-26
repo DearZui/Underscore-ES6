@@ -148,8 +148,10 @@
   _.each = _.forEach = function(obj, iteratee, context) {
     iteratee = optimizeCb(iteratee, context);
     var i, length;
-    if(ArrayProto.forEach) {
-      ArrayProto.forEach.call(obj, iteratee);
+    if(obj.constructor == Set) {
+      obj.forEach(iteratee);
+    } else if(obj.constructor === Map){
+      obj.forEach(obj, iteratee);
     } else if (isArrayLike(obj)) {
       for (i = 0, length = obj.length; i < length; i++) {
         iteratee(obj[i], i, obj);
