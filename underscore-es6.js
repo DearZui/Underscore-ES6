@@ -215,7 +215,11 @@
   _.find = _.detect = function(obj, predicate, context) {
     var key;
     if (isArrayLike(obj)) {
-      key = _.findIndex(obj, predicate, context);
+      if(Array.prototype.find) {
+        return Array.prototype.find.call(obj, predicate);
+      } else{
+        key = _.findIndex(obj, predicate, context);
+      }
     } else {
       key = _.findKey(obj, predicate, context);
     }
@@ -626,9 +630,14 @@
       return -1;
     };
   }
+  function es6FindIndex() {
+    return function(array, predicate, context) {
+      return array.findIndex(predicate);
+    }
+  }
 
   // Returns the first index on an array-like that passes a predicate test
-  _.findIndex = createPredicateIndexFinder(1);
+  _.findIndex = Array.prototype.findIndex ? es6FindIndex() : createPredicateIndexFinder(1);
   _.findLastIndex = createPredicateIndexFinder(-1);
 
   // Use a comparator function to figure out the smallest index at which
