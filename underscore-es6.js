@@ -229,12 +229,16 @@
   // Return all the elements that pass a truth test.
   // Aliased as `select`.
   _.filter = _.select = function(obj, predicate, context) {
-    var results = [];
-    predicate = cb(predicate, context);
-    _.each(obj, function(value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
-    });
-    return results;
+    if(Array.prototype.filter) {
+      return obj.filter(predicate);
+    } else {
+      var results = [];
+      predicate = cb(predicate, context);
+      _.each(obj, function(value, index, list) {
+        if (predicate(value, index, list)) results.push(value);
+      });
+      return results;
+    }
   };
 
   // Return all the elements for which a truth test fails.
