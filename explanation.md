@@ -48,3 +48,9 @@ _keys({{one: 1, two: 2, three: 3}})  //["one", "two", "three"]
 map返回的值`results`为一个新定义的数组，而each返回的是参数中的`obj`;
 
 所以两者的区别就在`each(obj, iteratee)`中的iteratee是会改变obj的，而map返回的是一个新的iteratee过的数组。
+
+***
+接下来我们看下`_.find`，其实和`_.findIndex`一样的，find到index了也就find到了值了。我们就来看findIndex
+
+findIndex和findLastIndex靠同一个函数实现`createPredicateIndexFinder`，这个函数是个闭包返回一个函数。很简单，findIndex的是传给它的参数是1，一个遍历，找到第一个符合findIndex的第二个参数(即一个函数predicate)的item，返回index就行了。
+

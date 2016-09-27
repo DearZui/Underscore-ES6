@@ -148,7 +148,7 @@
   _.each = _.forEach = function(obj, iteratee, context) {
     iteratee = optimizeCb(iteratee, context);
     var i, length;
-    if(obj.constructor == Set) {
+    if(obj.constructor === Set) {
       obj.forEach(iteratee);
     } else if(obj.constructor === Map){
       obj.forEach(obj, iteratee);
