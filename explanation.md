@@ -54,3 +54,6 @@ map返回的值`results`为一个新定义的数组，而each返回的是参数�
 
 findIndex和findLastIndex靠同一个函数实现`createPredicateIndexFinder`，这个函数是个闭包返回一个函数。很简单，findIndex的是传给它的参数是1，一个遍历，找到第一个符合findIndex的第二个参数(即一个函数predicate)的item，返回index就行了。
 
+***
+接下来到`_.filter`，同样很简单，用`_.each`遍历，符合条件的push到新定义的数组中去，最后返回这个数组即可。
+
